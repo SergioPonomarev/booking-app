@@ -1,7 +1,6 @@
 package main
 
 import (
-	"./helper"
 	"fmt"
 	"strings"
 )
@@ -19,8 +18,7 @@ func main() {
 	for {
 		var firstName, lastName, userEmail, userTickets = getUserInput()
 
-		var isValidName, isValidEmail, isValidTicketNumber = helper.ValidateUserInput(firstName, lastName, userEmail, userTickets, remainingTickets)
-		//helper.ValidateUserInput(firstName, lastName, userEmail, userTickets, remainingTickets)
+		var isValidName, isValidEmail, isValidTicketNumber = validateUserInput(firstName, lastName, userEmail, userTickets, remainingTickets)
 
 		if isValidName && isValidEmail && isValidTicketNumber {
 			bookTickets(userTickets, firstName, lastName, userEmail)

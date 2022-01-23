@@ -1,8 +1,8 @@
-package helper
+package main
 
 import "strings"
 
-func ValidateUserInput(
+func validateUserInput(
 	firstName string,
 	lastName string,
 	userEmail string,
