@@ -2,14 +2,20 @@ package main
 
 import (
 	"fmt"
-	"strings"
 )
 
 const conferenceTickets = 50
 
 var conferenceName = "Go Conference"
 var remainingTickets uint = conferenceTickets
-var bookings []string
+var bookings []UserData
+
+type UserData struct {
+	firstName       string
+	lastName        string
+	userEmail       string
+	numberOfTickets uint
+}
 
 func main() {
 
@@ -53,7 +59,15 @@ func bookTickets(
 	userEmail string) {
 
 	remainingTickets = remainingTickets - userTickets
-	bookings = append(bookings, firstName+" "+lastName)
+
+	var userData = UserData{
+		firstName:       firstName,
+		lastName:        lastName,
+		userEmail:       userEmail,
+		numberOfTickets: userTickets,
+	}
+
+	bookings = append(bookings, userData)
 
 	fmt.Printf("Thank you %v %v for booking %v tickets. You will receive a confirmation email at %v\n",
 		firstName,
@@ -71,15 +85,19 @@ func getUserInput() (string, string, string, uint) {
 
 	fmt.Println("Enter your first name: ")
 	fmt.Scan(&firstName)
+	//firstName = "Sergey"
 
 	fmt.Println("Enter your last name: ")
 	fmt.Scan(&lastName)
+	//lastName = "Ponomarev"
 
 	fmt.Println("Enter your email: ")
 	fmt.Scan(&userEmail)
+	//userEmail = "s@p.com"
 
 	fmt.Println("Enter number of tickets: ")
 	fmt.Scan(&userTickets)
+	//userTickets = 3
 
 	return firstName, lastName, userEmail, userTickets
 }
@@ -87,7 +105,7 @@ func getUserInput() (string, string, string, uint) {
 func getFirstNames() []string {
 	var result []string
 	for _, booking := range bookings {
-		result = append(result, strings.Fields(booking)[0])
+		result = append(result, booking.firstName)
 	}
 
 	return result
